@@ -1,9 +1,8 @@
 import pandas as pd
 import quandl, math
 import numpy as np
-from sklearn import preprocessing, svm
+from sklearn import preprocessing, svm, linear_model
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 
 df = quandl.get('WIKI/GOOGL', api_key='zxNJD8pnTVUfBj5JegFT')
 df = df[['Adj. Open', 'Adj. High', 'Adj. Low', 'Adj. Close', 'Adj. Volume']]
@@ -28,7 +27,8 @@ X = preprocessing.scale(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-clf = LinearRegression()
+#clf = linear_model.LinearRegression()
+clf = svm.SVR(kernel='poly')
 clf.fit(X_train, y_train)
 
 accuracy = clf.score(X_test, y_test)
