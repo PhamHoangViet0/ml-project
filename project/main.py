@@ -27,8 +27,8 @@ X = preprocessing.scale(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-#clf = linear_model.LinearRegression()
-clf = svm.SVR(kernel='poly')
+clf = linear_model.LinearRegression(n_jobs=8)
+# clf = svm.SVR(kernel='poly')
 clf.fit(X_train, y_train)
 
 accuracy = clf.score(X_test, y_test)
@@ -36,5 +36,5 @@ accuracy = clf.score(X_test, y_test)
 # print(len(df), forecast_out)
 # print(df.head())
 # print(df.tail())
-print(len(X), len(y))
+# print(len(X), len(y))
 print('Prediction for {} forward have {:.6f} accuracy'.format(forecast_out, accuracy))
